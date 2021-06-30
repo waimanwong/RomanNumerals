@@ -36,7 +36,7 @@ namespace RomanNumerals
 
                 if(successiveRepetitionCount > 3)
                 {
-                    //No digit can be repeted more than 3 times
+                    //No digit can be repeated more than 3 times in succession
                     return false;
                 }
                 else if (successiveRepetitionCount == 2 && 
