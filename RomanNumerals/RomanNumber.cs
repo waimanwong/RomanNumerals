@@ -94,7 +94,7 @@ namespace RomanNumerals
 
                     if (isLastRomanDigit)
                     {
-                        total += currentRomanDigit.Value;
+                        total += currentRomanDigit;
                     }
                     else
                     {
@@ -102,12 +102,12 @@ namespace RomanNumerals
                         if (currentRomanDigit >= nextRomanDigit)
                         {
                             //Additive notation
-                            total += currentRomanDigit.Value;
+                            total += currentRomanDigit;
                         }
                         else
                         {
                             //Substrative notation
-                            total += (nextRomanDigit.Value - currentRomanDigit.Value);
+                            total += (nextRomanDigit - currentRomanDigit);
 
                             //skip the next roman digit as it is already taken into account.
                             i++; 
