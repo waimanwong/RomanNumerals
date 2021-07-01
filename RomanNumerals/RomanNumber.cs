@@ -22,7 +22,6 @@ namespace RomanNumerals
 
             var successiveRepetitionCount = 0;
             var repeatedSymbol = string.Empty;
-            var previousChar = default(char);
 
             var symbolBuilder = new StringBuilder();
 
@@ -37,6 +36,7 @@ namespace RomanNumerals
 
                 var symbol = symbolBuilder.ToString();
 
+                //Count repetition
                 if (symbol == repeatedSymbol)
                 {
                     successiveRepetitionCount++;
@@ -47,6 +47,7 @@ namespace RomanNumerals
                     successiveRepetitionCount = 1;
                 }
 
+                //Check repetition against the rules
                 if(successiveRepetitionCount > 3)
                 {
                     //No digit can be repeated more than 3 times in succession
@@ -56,7 +57,7 @@ namespace RomanNumerals
                     (repeatedSymbol == "V" || repeatedSymbol == "L" || repeatedSymbol == "D" ||
                     repeatedSymbol == "_V" || repeatedSymbol == "_L" || repeatedSymbol == "_D"))
                 {
-                    //V, L, D cannot be repeated
+                    //V, L, D, _V, _L and _D cannot be repeated
                     return false;
                 }
 
@@ -70,7 +71,6 @@ namespace RomanNumerals
                 }
 
                 symbolBuilder.Clear();
-                previousChar = c;
             }
             romanNumber = temporaryRomanNumber;
 
