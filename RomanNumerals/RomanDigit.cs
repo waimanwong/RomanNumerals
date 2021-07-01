@@ -5,36 +5,36 @@ namespace RomanNumerals
 {
     public class RomanDigit
     {
-        private static Dictionary<char, int> ConversionTable = new Dictionary<char, int>
+        private static Dictionary<string, int> ConversionTable = new Dictionary<string, int>
         {
-            { 'I', 1 },
-            { 'V', 5 },
-            { 'X', 10 },
-            { 'L', 50 },
-            { 'C', 100 },
-            { 'D', 500 },
-            { 'M', 1000 },
+            { "I", 1 },
+            { "V", 5 },
+            { "X", 10 },
+            { "L", 50 },
+            { "C", 100 },
+            { "D", 500 },
+            { "M", 1000 },
         };
 
-        public static bool TryParse(char c, out RomanDigit romanDigit)
+        public static bool TryParse(string text, out RomanDigit romanDigit)
         {
             romanDigit = null;
 
-            if (ConversionTable.ContainsKey(c))
+            if (ConversionTable.ContainsKey(text))
             {
-                romanDigit = new RomanDigit(c);
+                romanDigit = new RomanDigit(text);
             }
 
             return romanDigit != null;
         }
 
-        public char Symbol { get; }
+        public string Symbol { get; }
 
         public int Value => ConversionTable[this.Symbol];
 
-        private RomanDigit(char c)
+        private RomanDigit(string text)
         {
-            this.Symbol = c;
+            this.Symbol = text;
         }
 
         public static bool operator <= (RomanDigit left, RomanDigit right) 
@@ -51,7 +51,7 @@ namespace RomanNumerals
 
         public override string ToString()
         {
-            return new string(new[] { this.Symbol });
+            return this.Symbol;
         }
     }
 }

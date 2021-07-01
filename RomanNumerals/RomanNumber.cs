@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace RomanNumerals
 {
@@ -20,17 +21,23 @@ namespace RomanNumerals
             var temporaryRomanNumber = new RomanNumber();
 
             var successiveRepetitionCount = 0;
-            var repeatedChar = default(char);
+            var repeatedSymbol = string.Empty;
+
+            var symbolBuilder = new StringBuilder();
 
             foreach(var c in text)
             {
-                if (c == repeatedChar)
+                symbolBuilder.Append(c);
+
+                var symbol = symbolBuilder.ToString();
+
+                if (symbol == repeatedSymbol)
                 {
                     successiveRepetitionCount++;
                 }
                 else
                 {
-                    repeatedChar = c;
+                    repeatedSymbol = symbol;
                     successiveRepetitionCount = 1;
                 }
 
@@ -40,13 +47,13 @@ namespace RomanNumerals
                     return false;
                 }
                 else if (successiveRepetitionCount == 2 && 
-                    (repeatedChar == 'V' || repeatedChar == 'L' || repeatedChar == 'D'))
+                    (repeatedSymbol == "V" || repeatedSymbol == "L" || repeatedSymbol == "D"))
                 {
                     //V, L, D cannot be repeated
                     return false;
                 }
 
-                if(RomanDigit.TryParse(c, out var romanDigit))
+                if(RomanDigit.TryParse(symbol, out var romanDigit))
                 {
                     temporaryRomanNumber.AddDigit(romanDigit);
                 }
@@ -54,6 +61,8 @@ namespace RomanNumerals
                 {
                     return false;
                 }
+
+                symbolBuilder.Clear();
             }
             romanNumber = temporaryRomanNumber;
 

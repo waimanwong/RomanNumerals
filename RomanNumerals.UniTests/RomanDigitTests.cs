@@ -7,14 +7,14 @@ namespace RomanNumerals.UniTests
     public class RomanDigitTests
     {
         [Theory]
-        [InlineData('I', 1)]
-        [InlineData('V', 5)]
-        [InlineData('X', 10)]
-        [InlineData('L', 50)]
-        [InlineData('C', 100)]
-        [InlineData('D', 500)]
-        [InlineData('M', 1000)]
-        public void TryParse_Should_Return_True_For_Valid_Symbols(char symbol, int expectedValue)
+        [InlineData("I", 1)]
+        [InlineData("V", 5)]
+        [InlineData("X", 10)]
+        [InlineData("L", 50)]
+        [InlineData("C", 100)]
+        [InlineData("D", 500)]
+        [InlineData("M", 1000)]
+        public void TryParse_Should_Return_True_For_Valid_Symbols(string symbol, int expectedValue)
         {
             //Arrange
 
@@ -27,10 +27,10 @@ namespace RomanNumerals.UniTests
         }
 
         [Theory]
-        [InlineData('i')]
-        [InlineData('a')]
-        [InlineData('z')]
-        public void TryParse_Should_Return_False_For_Invalid_Symbols(char invalidSymbol)
+        [InlineData("i")]
+        [InlineData("a")]
+        [InlineData("z")]
+        public void TryParse_Should_Return_False_For_Invalid_Symbols(string invalidSymbol)
         {
             //Arrange
 
@@ -46,8 +46,8 @@ namespace RomanNumerals.UniTests
         public void LessOrEqualTo_Operator_Should_Compare_RomanDigits()
         {
             //Arrange
-            RomanDigit.TryParse('I', out var small);
-            RomanDigit.TryParse('C', out var large);
+            RomanDigit.TryParse("I", out var small);
+            RomanDigit.TryParse("C", out var large);
 
             //Act and assert
             (small <= large).Should().BeTrue();
@@ -57,8 +57,8 @@ namespace RomanNumerals.UniTests
         public void GreaterOrEqualTo_Operator_Should_Compare_RomanDigits()
         {
             //Arrange
-            RomanDigit.TryParse('I', out var small);
-            RomanDigit.TryParse('C', out var large);
+            RomanDigit.TryParse("I", out var small);
+            RomanDigit.TryParse("C", out var large);
 
             //Act and assert
             (large >= small).Should().BeTrue();
@@ -68,7 +68,7 @@ namespace RomanNumerals.UniTests
         public void ImplicitConversion_Should_Convert_To_String()
         {
             //Arrange
-            RomanDigit.TryParse('D', out var one);
+            RomanDigit.TryParse("D", out var one);
 
             //Act
             string text = one;
@@ -78,14 +78,14 @@ namespace RomanNumerals.UniTests
         }
 
         [Theory]
-        [InlineData('I', 1)]
-        [InlineData('V', 5)]
-        [InlineData('X', 10)]
-        [InlineData('L', 50)]
-        [InlineData('C', 100)]
-        [InlineData('D', 500)]
-        [InlineData('M', 1000)]
-        public void ImplicitConversion_Should_Convert_To_Int(char symbol, int expectedValue)
+        [InlineData("I", 1)]
+        [InlineData("V", 5)]
+        [InlineData("X", 10)]
+        [InlineData("L", 50)]
+        [InlineData("C", 100)]
+        [InlineData("D", 500)]
+        [InlineData("M", 1000)]
+        public void ImplicitConversion_Should_Convert_To_Int(string symbol, int expectedValue)
         {
             //Arrange
             RomanDigit.TryParse(symbol, out var digit);
