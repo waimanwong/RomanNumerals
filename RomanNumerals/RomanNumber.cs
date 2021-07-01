@@ -22,12 +22,18 @@ namespace RomanNumerals
 
             var successiveRepetitionCount = 0;
             var repeatedSymbol = string.Empty;
+            var previousChar = default(char);
 
             var symbolBuilder = new StringBuilder();
 
             foreach(var c in text)
             {
                 symbolBuilder.Append(c);
+
+                if (c == '_') 
+                {
+                    continue;
+                }
 
                 var symbol = symbolBuilder.ToString();
 
@@ -63,6 +69,7 @@ namespace RomanNumerals
                 }
 
                 symbolBuilder.Clear();
+                previousChar = c;
             }
             romanNumber = temporaryRomanNumber;
 

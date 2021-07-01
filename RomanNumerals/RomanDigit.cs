@@ -14,6 +14,14 @@ namespace RomanNumerals
             { "C", 100 },
             { "D", 500 },
             { "M", 1000 },
+            // Vinculum system
+            { "_I", 1_000 },
+            { "_V", 5_000 },
+            { "_X", 10_000 },
+            { "_L", 50_000 },
+            { "_C", 100_000 },
+            { "_D", 500_000 },
+            { "_M", 1_000_000 },
         };
 
         public static bool TryParse(string text, out RomanDigit romanDigit)

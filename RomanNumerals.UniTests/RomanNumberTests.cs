@@ -84,7 +84,6 @@ namespace RomanNumerals.UniTests
             isValid.Should().BeFalse();
         }
 
-
         [Theory]
         [InlineData("VV")]
         [InlineData("LL")]
@@ -98,6 +97,52 @@ namespace RomanNumerals.UniTests
 
             //Assert
             isValid.Should().BeFalse();
+        }
+
+        [Fact]
+        public void TryParse_Should_Return_False_When_Underscore_Is_Repeated_In_Succession()
+        {
+            //Arrange 
+            var text = "__C";
+
+            //Act
+            var isValid = RomanNumber.TryParse(text, out RomanNumber romanNumber);
+
+            //Assert
+            isValid.Should().BeFalse();
+        }
+
+        [Theory]
+        [InlineData("_X_V")]
+        [InlineData("_C_L_V")]
+        public void TryParse_Should_Return_True_For_Vinculum_System_Form(string text)
+        {
+            //Arrange 
+            
+            //Act
+            var isValid = RomanNumber.TryParse(text, out RomanNumber romanNumber);
+
+            //Assert
+            isValid.Should().BeTrue();
+        }
+
+        [Theory]
+        [InlineData("_X_V", 15_000)]
+        [InlineData("_C_L_V", 155_000)]
+        [InlineData("_I_VDCXXVII", 4_627)]
+        [InlineData("_X_X_V", 25_000)]
+        [InlineData("_X_X_VCDLIX", 25_459)]
+        [InlineData("_M_M_M_C_M_X_C_I_XCMXCIX", 3_999_999)] //largest vinculum number
+        public void Value_Should_Support_Vinculum_System_Form(string text, int expectedValue)
+        {
+            //Arrange 
+            RomanNumber.TryParse(text, out RomanNumber romanNumber);
+
+            //Act
+            var actualValue = romanNumber.Value;
+
+            //Assert
+            actualValue.Should().Be(expectedValue);
         }
     }
 }
