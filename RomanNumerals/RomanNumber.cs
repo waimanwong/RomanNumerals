@@ -38,33 +38,25 @@ namespace RomanNumerals
 
                 var symbol = symbolBuilder.ToString();
 
-                //Count repetition
-                if (symbol == repeatedSymbol)
-                {
-                    successiveRepetitionCount++;
-                }
-                else
-                {
-                    repeatedSymbol = symbol;
-                    successiveRepetitionCount = 1;
-                }
-
-                //Check repetition against the rules
-                if(successiveRepetitionCount > 3)
-                {
-                    //No digit can be repeated more than 3 times in succession
-                    return false;
-                }
-                else if (successiveRepetitionCount == 2 && 
-                    (repeatedSymbol == "V" || repeatedSymbol == "L" || repeatedSymbol == "D" ||
-                    repeatedSymbol == "_V" || repeatedSymbol == "_L" || repeatedSymbol == "_D"))
-                {
-                    //V, L, D, _V, _L and _D cannot be repeated
-                    return false;
-                }
-
                 if(RomanDigit.TryParse(symbol, out var romanDigit))
                 {
+                    //Count repetition
+                    if (symbol == repeatedSymbol)
+                    {
+                        successiveRepetitionCount++;
+                    }
+                    else
+                    {
+                        repeatedSymbol = symbol;
+                        successiveRepetitionCount = 1;
+                    }
+
+                    //Check repetition of the digit against the maximul allowed
+                    if (successiveRepetitionCount > romanDigit.MaxSucessiveRepetition)
+                    {   
+                        return false;
+                    }
+                    
                     temporaryRomanNumber.AddDigit(romanDigit);
                 }
                 else

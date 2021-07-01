@@ -1,36 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RomanNumerals
 {
     public class RomanDigit
     {
-        private static Dictionary<string, int> ConversionTable = new Dictionary<string, int>
+        private static List<RomanDigit> RomanDigits = new List<RomanDigit>()
         {
-            { "I", 1 },
-            { "V", 5 },
-            { "X", 10 },
-            { "L", 50 },
-            { "C", 100 },
-            { "D", 500 },
-            { "M", 1000 },
-            // Vinculum system
-            { "_I", 1_000 },
-            { "_V", 5_000 },
-            { "_X", 10_000 },
-            { "_L", 50_000 },
-            { "_C", 100_000 },
-            { "_D", 500_000 },
-            { "_M", 1_000_000 },
+            new RomanDigit("I", 1, 3),
+            new RomanDigit("V", 5, 1),
+            new RomanDigit("X", 10, 3),
+            new RomanDigit("L", 50, 1),
+            new RomanDigit("C", 100, 3),
+            new RomanDigit("D", 500, 1),
+            new RomanDigit("M", 1000, 3),
+            new RomanDigit("_I", 1_000, 3),
+            new RomanDigit("_V", 5_000, 1),
+            new RomanDigit("_X", 10_000, 3),
+            new RomanDigit("_L", 50_000, 1),
+            new RomanDigit("_C", 100_000, 3),
+            new RomanDigit("_D", 500_000, 1),
+            new RomanDigit("_M", 1_000_000, 3)
         };
+
+        private static Dictionary<string, RomanDigit> RomanDigitsPerSymbol = RomanDigits.ToDictionary(
+            keySelector: digit => digit.Symbol,
+            elementSelector: digit => digit);
 
         public static bool TryParse(string text, out RomanDigit romanDigit)
         {
             romanDigit = null;
 
-            if (ConversionTable.ContainsKey(text))
+            if (RomanDigitsPerSymbol.ContainsKey(text))
             {
-                romanDigit = new RomanDigit(text);
+                romanDigit = RomanDigitsPerSymbol[text];
             }
 
             return romanDigit != null;
@@ -38,11 +42,15 @@ namespace RomanNumerals
 
         public string Symbol { get; }
 
-        public int Value => ConversionTable[this.Symbol];
+        public int Value { get; }
 
-        private RomanDigit(string text)
+        public int MaxSucessiveRepetition { get; }
+
+        private RomanDigit(string symbol, int value, int maxSuccessiveRepetition)
         {
-            this.Symbol = text;
+            this.Symbol = symbol;
+            this.Value = value;
+            this.MaxSucessiveRepetition = maxSuccessiveRepetition;
         }
 
         public static bool operator <= (RomanDigit left, RomanDigit right) 
