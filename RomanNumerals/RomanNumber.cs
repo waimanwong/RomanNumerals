@@ -18,6 +18,8 @@ namespace RomanNumerals
                 return false;
             }
 
+            var sanitizedText = text.Trim();
+
             var temporaryRomanNumber = new RomanNumber();
 
             var successiveRepetitionCount = 0;
@@ -25,7 +27,7 @@ namespace RomanNumerals
 
             var symbolBuilder = new StringBuilder();
 
-            foreach(var c in text)
+            foreach(var c in sanitizedText)
             {
                 symbolBuilder.Append(c);
 

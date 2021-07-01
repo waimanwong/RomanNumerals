@@ -147,5 +147,19 @@ namespace RomanNumerals.UniTests
             //Assert
             actualValue.Should().Be(expectedValue);
         }
+
+        [Fact]
+        public void TryParse_Should_Remove_Leading_And_Trailing_Whitespace()
+        {
+            //Arrange
+            var text = "   IX   ";
+
+            //Act
+            var isValid = RomanNumber.TryParse(text, out var romanNumber);
+
+            //Assert
+            isValid.Should().BeTrue();
+            romanNumber.Value.Should().Be(9);
+        }
     }
 }
