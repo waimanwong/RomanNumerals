@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Xunit;
 
-namespace RomanNumerals.UniTests
+namespace RomanNumerals.UnitTests
 {
     public class RomanNumberTests
     {   

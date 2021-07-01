@@ -2,7 +2,7 @@ using FluentAssertions;
 using System;
 using Xunit;
 
-namespace RomanNumerals.UniTests
+namespace RomanNumerals.UnitTests
 {
     public class RomanDigitTests
     {
