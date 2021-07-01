@@ -53,7 +53,8 @@ namespace RomanNumerals
                     return false;
                 }
                 else if (successiveRepetitionCount == 2 && 
-                    (repeatedSymbol == "V" || repeatedSymbol == "L" || repeatedSymbol == "D"))
+                    (repeatedSymbol == "V" || repeatedSymbol == "L" || repeatedSymbol == "D" ||
+                    repeatedSymbol == "_V" || repeatedSymbol == "_L" || repeatedSymbol == "_D"))
                 {
                     //V, L, D cannot be repeated
                     return false;

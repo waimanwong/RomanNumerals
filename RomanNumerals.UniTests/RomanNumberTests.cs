@@ -88,6 +88,9 @@ namespace RomanNumerals.UniTests
         [InlineData("VV")]
         [InlineData("LL")]
         [InlineData("DD")]
+        [InlineData("_V_V")]
+        [InlineData("_L_L")]
+        [InlineData("_D_D")]
         public void TryParse_Should_Return_False_When_V_Or_L_Or_D_Are_Repeated_In_Succession(string text)
         {
             //Arrange 
