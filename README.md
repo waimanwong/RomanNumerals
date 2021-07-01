@@ -13,5 +13,3 @@ I take a DDD approach and modeled two [value objects](https://lostechies.com/jim
 The first version supported 1 ```char``` symbol and a roman digit holds the symbol as one ```char```.
 
 Then I added the vinculum notation. A refactoring was necessary to support symbol as a ```string``` as well as the parsing of the input text.
-
-I remove the duplication of 
